@@ -1,25 +1,33 @@
 package Sincronització.ExerciciTaller;
 
 public class Encadellador extends Thread{
-    CistellaCos c = new CistellaCos();
-    CistellaManigues m = new CistellaManigues();
-    int roba = 0;
+
+    Cistell cCos;
+    Cistell cManigues;
+
+    public Encadellador(Cistell cCos, Cistell cManigues){
+        this.cCos = cCos;
+        this.cManigues = cManigues;
+    }
+
+    private int roba = 0;
 
     @Override
     public void run(){
         while (true) {
             try {
-                c.treureCos();
-                m.treureManiga();
-                m.treureManiga();
+                cCos.treureCos();
+                cManigues.treureManiga();
                 roba++;
+                cCos.deixarCistell();
+                cManigues.deixarCistell();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
             System.out.println("Total: " + roba);
 
             try {
-                Thread.sleep((int) (Math.random() * 100) + 50);
+                Thread.sleep((int) (Math.random() * 1000) + 50);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

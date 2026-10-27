@@ -3,11 +3,13 @@ package Sincronització.ExerciciTaller;
 
 public class Main {
     public static void main(String[] args) {
-        CosidorCos c = new CosidorCos();
-        CosidorManigues m = new CosidorManigues();
-        Encadellador e = new Encadellador();
+        Cistell cCosos = new Cistell();
+        Cistell cManigues = new Cistell();
+        CosidorCos cc = new CosidorCos(cCosos);
+        CosidorManigues m = new CosidorManigues(cManigues);
+        Encadellador e = new Encadellador(cCosos, cManigues);
 
-        c.start();
+        cc.start();
         m.start();
         e.start();
     }

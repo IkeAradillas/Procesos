@@ -1,7 +1,11 @@
 package Sincronització.ExerciciTaller;
 
 public class CosidorManigues extends Thread{
-    CistellaManigues m = new CistellaManigues();
+    Cistell m;
+
+    public CosidorManigues(Cistell m){
+        this.m=m;
+    }
 
 
     @Override

@@ -1,7 +1,11 @@
 package Sincronització.ExerciciTaller;
 
 public class CosidorCos extends Thread{
-    CistellaCos c = new CistellaCos();
+    Cistell c;
+
+    public CosidorCos(Cistell c){
+        this.c = c;
+    }
 
     @Override
     public void run(){
