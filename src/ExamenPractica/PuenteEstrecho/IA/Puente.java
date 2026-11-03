@@ -20,11 +20,8 @@ public class Puente {
             esperandoDer++;
         }
 
-        while (cantidad == 3 || (cantidad > 0 &&
-                ((lado.equals("izq") && !izq) ||
-                        (lado.equals("der") && izq)))) {
-            wait();
-        }
+        while (cantidad == 3 || (cantidad > 0 && ((lado.equals("izq") && !izq) || (lado.equals("der") && izq)))) wait();
+
 
         if (cantidad == 0) {
             izq = lado.equals("izq");
