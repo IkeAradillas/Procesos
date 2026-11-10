@@ -45,7 +45,6 @@ public class DatagramSocketClient {
     }
 
     private boolean mustContinue(byte[] sendingData) {
-
         return false;
     }
 }
