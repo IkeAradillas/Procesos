@@ -6,7 +6,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Locale;
 
 public class DatagramSocketServer {
