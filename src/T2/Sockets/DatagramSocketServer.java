@@ -5,8 +5,6 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.nio.charset.StandardCharsets;
-import java.util.Locale;
 
 public class DatagramSocketServer {
     DatagramSocket socket;
@@ -42,7 +40,7 @@ public class DatagramSocketServer {
     }
 
     private byte[] processData(byte[] data, int lenght) {
-        String msg = new String(data,0,lenght);
+        String msg = new String(data, 0, lenght);
         msg = msg.toUpperCase();
         System.out.printf("(%s) %s%n",clientIP,msg);
 
