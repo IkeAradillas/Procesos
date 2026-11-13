@@ -2,11 +2,14 @@ package T2.Sockets;
 
 import java.io.IOException;
 import java.net.*;
+import java.util.Scanner;
 
 public class DatagramSocketClient {
     InetAddress serverIP;
     int serverPort;
     DatagramSocket socket;
+    Scanner sc = new Scanner(System.in);;
+    String nom;
 
     public void init(String host, int port) throws SocketException,
             UnknownHostException {
@@ -34,17 +37,25 @@ public class DatagramSocketClient {
             //processament de les dades rebudes i obtenció de la resposta
             sendingData = getDataToRequest(packet.getData(), packet.getLength());
         }
+        socket.close();
     }
 
     private byte[] getDataToRequest(byte[] data, int length) {
-        return data;
+        String rebut = new String(data,0, length);
+        //Imprimeix el nom del client + el que es rep del server i demana més dades
+        System.out.print(nom+"("+rebut+")"+"> ");
+        String msg = sc.nextLine();
+        return msg.getBytes();
     }
 
     private byte[] getFirstRequest() {
-        return new byte[0];
+        System.out.println("Entra el teu nom: ");
+        nom = sc.nextLine();
+        return nom.getBytes();
     }
 
     private boolean mustContinue(byte[] sendingData) {
-        return false;
+        String msg = new String(sendingData).toLowerCase();
+        return !msg.equals("adeu");
     }
 }

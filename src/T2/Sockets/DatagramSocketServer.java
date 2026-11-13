@@ -10,6 +10,7 @@ import java.util.Locale;
 
 public class DatagramSocketServer {
     DatagramSocket socket;
+    InetAddress clientIP;
 
     public void init(int port) throws SocketException {
         socket = new DatagramSocket(port);
@@ -18,7 +19,7 @@ public class DatagramSocketServer {
     public void runServer() throws IOException {
         byte [] receivingData = new byte[1024];
         byte [] sendingData;
-        InetAddress clientIP;
+
         int clientPort;
 
         //el servidor atén el port indefinidament
@@ -41,8 +42,10 @@ public class DatagramSocketServer {
     }
 
     private byte[] processData(byte[] data, int lenght) {
-        String a = new String(data,0,lenght);
-        a = a.toUpperCase(Locale.ROOT);
-        return a.getBytes(StandardCharsets.UTF_8);
+        String msg = new String(data,0,lenght);
+        msg = msg.toUpperCase();
+        System.out.printf("(%s) %s%n",clientIP,msg);
+
+        return msg.getBytes();
     }
 }
