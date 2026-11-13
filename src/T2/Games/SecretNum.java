@@ -10,7 +10,7 @@ public class SecretNum {
     private int num;
 
     public SecretNum() {
-        num = 0;
+        num = (int) (Math.random()*100);
     }
 
     public SecretNum(int n) {
