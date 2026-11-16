@@ -7,7 +7,7 @@ public class MainMultiplicacio {
         ForkJoinPool pool = new ForkJoinPool();
 
         int a = 2000;
-        int b = 5;
+        int b = 3;
 
         Multiplicacio multi = new Multiplicacio(a, b);
         long res = pool.invoke(multi);

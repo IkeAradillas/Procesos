@@ -13,7 +13,7 @@ public class Multiplicacio extends RecursiveTask<Long> {
     }
 
     public long MultiplicacioR(int a, int b) {
-        if (a<=LLINDAR) MultiplicacioS(a,b);
+        if (a<=LLINDAR) return MultiplicacioS(a,b);
         if (a==1) return (b);
         if (a%2!=0) return (b+MultiplicacioR(a/2, b+b));
         else return MultiplicacioR(a/2, b+b);
@@ -21,7 +21,7 @@ public class Multiplicacio extends RecursiveTask<Long> {
 
     public long MultiplicacioS(int a, int b) {
         long sum = 0;
-        for (int i = 0; i <= a; i++) {
+        for (int i = 0; i < a; i++) {
             sum += b;
         }
         return sum;
