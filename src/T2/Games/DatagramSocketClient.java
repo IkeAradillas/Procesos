@@ -49,7 +49,7 @@ public class DatagramSocketClient {
     }
 
     private byte[] getFirstRequest() {
-        System.out.println("Entra el teu nom: ");
+        System.out.println("Introduce tu nombre: ");
         nom = sc.nextLine();
         return nom.getBytes();
     }

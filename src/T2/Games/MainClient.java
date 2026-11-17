@@ -1,6 +1,12 @@
 package T2.Games;
 
+import java.io.IOException;
+
 public class MainClient {
-    DatagramSocketClient dss = new DatagramSocketClient();
+    public static void main(String[] args) throws IOException {
+        DatagramSocketClient dsc = new DatagramSocketClient();
+        dsc.init("127.0.0.1", 6767);
+        dsc.runClient();
+    }
 
 }
