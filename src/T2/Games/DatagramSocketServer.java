@@ -5,6 +5,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
+import java.nio.ByteBuffer;
 
 public class DatagramSocketServer {
     DatagramSocket socket;
@@ -40,7 +41,7 @@ public class DatagramSocketServer {
         //el servidor atén el port indefinidament
         while(true){
             //creació del paquet per rebre les dades
-            packet = new DatagramPacket(receivingData, 1024);
+            packet = new DatagramPacket(receivingData, 4);
             //espera de les dades
             socket.receive(packet);
             //processament de les dades rebudes i obtenció de la resposta
@@ -65,6 +66,8 @@ public class DatagramSocketServer {
     }
 
     private byte[] processData(byte[] data, int lenght) {
+        // Mejorable: Mirar como pasar de byte a int, ademas de comprobar que entre un int y no un string / float / etc
+
         String msg = new String(data, 0, lenght);
         int num = Integer.parseInt(msg);
         int res = sn.comprova(num);
