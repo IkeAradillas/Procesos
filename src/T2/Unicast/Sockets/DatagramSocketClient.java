@@ -1,8 +1,7 @@
-package T2.Games;
+package T2.Unicast.Sockets;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class DatagramSocketClient {
@@ -26,7 +25,7 @@ public class DatagramSocketClient {
         //a l'inici
         sendingData = getFirstRequest();
         //el servidor atén el port indefinidament
-        while(mustContinue(receivedData)){
+        while(mustContinue(sendingData)){
             DatagramPacket packet = new DatagramPacket(sendingData, sendingData.length, serverIP, serverPort);
             //enviament de la resposta
             socket.send(packet);
@@ -50,15 +49,13 @@ public class DatagramSocketClient {
     }
 
     private byte[] getFirstRequest() {
-        System.out.println("Introduce tu nombre: ");
+        System.out.println("Entra el teu nom: ");
         nom = sc.nextLine();
         return nom.getBytes();
     }
 
-    private boolean mustContinue(byte[] receivedData) {
-        // NO funciona correctamente, mirar porque
-
-        String msg = new String(receivedData);
-        return !msg.equals("Has endevinat el numero!");
+    private boolean mustContinue(byte[] sendingData) {
+        String msg = new String(sendingData).toLowerCase();
+        return !msg.equals("adeu");
     }
 }

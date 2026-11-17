@@ -1,4 +1,4 @@
-package T2.Games;
+package T2.Unicast.Games;
 
 
 public class SecretNum {
