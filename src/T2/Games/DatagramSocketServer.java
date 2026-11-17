@@ -9,9 +9,11 @@ import java.net.SocketException;
 public class DatagramSocketServer {
     DatagramSocket socket;
     InetAddress clientIP;
+    SecretNum sn;
 
-    public void init(int port) throws SocketException {
+    public void init(int port, SecretNum sn) throws SocketException {
         socket = new DatagramSocket(port);
+        this.sn = sn;
     }
 
     public void runServer() throws IOException {
@@ -41,8 +43,11 @@ public class DatagramSocketServer {
 
     private byte[] processData(byte[] data, int lenght) {
         String msg = new String(data, 0, lenght);
-        msg = msg.toUpperCase();
-        System.out.printf("(%s) %s%n",clientIP,msg);
+        int num = Integer.parseInt(msg);
+        int res = sn.comprova(num);
+        if (res == 1) System.out.println(num + " es menor que el numero secret");
+        else if (res == 2) System.out.println(num + " es mayor que el numero secret");
+        else System.out.println("Has endevinat el numero!");
 
         return msg.getBytes();
     }
