@@ -34,6 +34,7 @@ public class SecretNum {
      */
     public int comprova(int n) {
         if(num == n) return 0;
+
         else if(num < n) return 1;
         else return 2;
     }

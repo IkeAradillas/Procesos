@@ -10,6 +10,7 @@ public class DatagramSocketClient {
     DatagramSocket socket;
     Scanner sc = new Scanner(System.in);;
     String nom;
+    boolean fi = false;
 
     public void init(String host, int port) throws SocketException,
             UnknownHostException {
@@ -25,17 +26,22 @@ public class DatagramSocketClient {
         //a l'inici
         sendingData = getFirstRequest();
         //el servidor atén el port indefinidament
-        while(mustContinue(receivedData)){
+        while(!fi){
             DatagramPacket packet = new DatagramPacket(sendingData, sendingData.length, serverIP, serverPort);
             //enviament de la resposta
             socket.send(packet);
 
             //creació del paquet per rebre les dades
             packet = new DatagramPacket(receivedData, 1024);
-            //espera de les dades
-            socket.receive(packet);
-            //processament de les dades rebudes i obtenció de la resposta
-            sendingData = getDataToRequest(packet.getData(), packet.getLength());
+            try {
+                //espera de les dades
+                socket.receive(packet);
+                //processament de les dades rebudes i obtenció de la resposta
+                sendingData = getDataToRequest(packet.getData(), packet.getLength());
+                if(mustContinue(sendingData)) fi = true;
+            } catch (Exception e) {
+                fi = true;
+            }
         }
         socket.close();
     }
@@ -58,6 +64,6 @@ public class DatagramSocketClient {
         // NO funciona correctamente, mirar porque
 
         String msg = new String(receivedData);
-        return !msg.equals("Has endevinat el numero!");
+        return msg.equals("Has endevinat el numero!");
     }
 }

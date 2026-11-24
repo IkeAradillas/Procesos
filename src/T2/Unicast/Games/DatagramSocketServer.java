@@ -10,6 +10,7 @@ public class DatagramSocketServer {
     DatagramSocket socket;
     InetAddress clientIP;
     SecretNum sn;
+    boolean fi = false;
 
     public void init(int port, SecretNum sn) throws SocketException {
         socket = new DatagramSocket(port);
@@ -53,6 +54,7 @@ public class DatagramSocketServer {
             packet = new DatagramPacket(sendingData, sendingData.length, clientIP, clientPort);
             //enviament de la resposta
             socket.send(packet);
+            if (fi) return;
         }
     }
 
@@ -72,7 +74,10 @@ public class DatagramSocketServer {
         int res = sn.comprova(num);
         if (res == 1) return (num + " es MAYOR que el numero secret").getBytes();
         else if (res == 2) return (num + " es MENOR que el numero secret").getBytes();
-        else return "Has endevinat el numero!".getBytes();
+        else{
+            fi = true;
+            return "Has endevinat el numero!".getBytes();
+        }
 
     }
 }
