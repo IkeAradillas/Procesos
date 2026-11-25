@@ -1,4 +1,4 @@
-package T2.Multicast;
+package T2.Multicast.Velocitat;
 
 public class Velocitat {
 
