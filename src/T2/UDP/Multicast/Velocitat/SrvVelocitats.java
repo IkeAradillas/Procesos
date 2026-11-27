@@ -1,4 +1,4 @@
-package T2.Multicast.Velocitat;
+package T2.UDP.Multicast.Velocitat;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

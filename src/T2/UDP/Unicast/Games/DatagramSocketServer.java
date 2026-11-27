@@ -1,4 +1,4 @@
-package T2.Unicast.Games;
+package T2.UDP.Unicast.Games;
 
 import java.io.IOException;
 import java.net.DatagramPacket;

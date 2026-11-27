@@ -1,4 +1,4 @@
-package T2.Unicast.Sockets;
+package T2.UDP.Unicast.Sockets;
 
 import java.io.IOException;
 

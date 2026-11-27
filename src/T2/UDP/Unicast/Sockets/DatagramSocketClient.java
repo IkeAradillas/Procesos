@@ -1,4 +1,4 @@
-package T2.Unicast.Games;
+package T2.UDP.Unicast.Sockets;
 
 import java.io.IOException;
 import java.net.*;
@@ -10,7 +10,6 @@ public class DatagramSocketClient {
     DatagramSocket socket;
     Scanner sc = new Scanner(System.in);;
     String nom;
-    boolean fi = false;
 
     public void init(String host, int port) throws SocketException,
             UnknownHostException {
@@ -26,22 +25,17 @@ public class DatagramSocketClient {
         //a l'inici
         sendingData = getFirstRequest();
         //el servidor atén el port indefinidament
-        while(!fi){
+        while(mustContinue(sendingData)){
             DatagramPacket packet = new DatagramPacket(sendingData, sendingData.length, serverIP, serverPort);
             //enviament de la resposta
             socket.send(packet);
 
             //creació del paquet per rebre les dades
             packet = new DatagramPacket(receivedData, 1024);
-            try {
-                //espera de les dades
-                socket.receive(packet);
-                //processament de les dades rebudes i obtenció de la resposta
-                sendingData = getDataToRequest(packet.getData(), packet.getLength());
-                if(mustContinue(sendingData)) fi = true;
-            } catch (Exception e) {
-                fi = true;
-            }
+            //espera de les dades
+            socket.receive(packet);
+            //processament de les dades rebudes i obtenció de la resposta
+            sendingData = getDataToRequest(packet.getData(), packet.getLength());
         }
         socket.close();
     }
@@ -55,15 +49,13 @@ public class DatagramSocketClient {
     }
 
     private byte[] getFirstRequest() {
-        System.out.println("Introduce tu nombre: ");
+        System.out.println("Entra el teu nom: ");
         nom = sc.nextLine();
         return nom.getBytes();
     }
 
-    private boolean mustContinue(byte[] receivedData) {
-        // NO funciona correctamente, mirar porque
-
-        String msg = new String(receivedData);
-        return msg.equals("Has endevinat el numero!");
+    private boolean mustContinue(byte[] sendingData) {
+        String msg = new String(sendingData).toLowerCase();
+        return !msg.equals("adeu");
     }
 }
